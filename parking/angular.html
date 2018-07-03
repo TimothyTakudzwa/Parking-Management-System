@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Light Bootstrap Dashboard by Creative Tim</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</head>
+
+<body class="list-group" ng-controller="StoreController as store">
+    <header>
+        <h1 class="text-center">Flatlander Crafted Gems</h1>
+        <h2 class="text-center">– an Angular store –</h2>
+    </header>
+    <div class="list-group-item" ng-repeat="product in store.products">
+        <h3>
+            {{product.name}}
+            <em class="pull-right">{{product.price | currency}}</em>
+        </h3>
+        <section ng-show="product.images.length">
+            <img ng-src="{{product.images[0]}}" />
+            <ul class="list-inline thumbs">
+                <li class="thumbnail" ng-repeat="image in product.images">
+                    <img ng-src="{{image}}" />
+                </li>
+            </ul>
+        </section>
+
+        <section class="tab" ng-controller="TabController as tab">
+            <ul class="nav nav-pills">
+                <li ng-class="{active:tab.isSet(1)}">
+                    <a href ng-click="tab.setTab(1)">Description</a></li>
+                <li ng-class="{active:tab.isSet(2)}">
+                    <a href ng-click="tab.setTab(2)">Specs</a></li>
+                <li ng-class="{active:tab.isSet(3)}">
+                    <a href ng-click="tab.setTab(3)">Reviews</a></li>
+            </ul>
+            <div ng-show="tab.isSet(1)">
+                <h4>Description</h4>
+                <blockquote>{{product.description}}</blockquote>
+            </div>
+            <div ng-show="tab.isSet(2)">
+                <h4>Specs</h4>
+                <blockquote>Shine: </blockquote>
+            </div>
+            <div ng-show="tab.isSet(3)">
+                <h4>Reviews</h4>
+                <blockquote></blockquote>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
